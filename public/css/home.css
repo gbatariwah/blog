@@ -1,0 +1,93 @@
+* {
+ font-family: 'Poppins', sans-serif;
+}
+
+h3 {
+ text-align: center;
+ text-decoration: underline;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 40px;
+  padding: 20px;
+  justify-content: center;
+}
+
+article {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background-color: rgb(253, 253, 253);
+  box-shadow: 0 0 6px 3px  rgb(207, 207, 207);
+  border-radius: 5px;
+  min-height: 300px;
+  padding: 10px;
+}
+
+article:hover {
+ transform: scale(1.02);
+}
+
+article:hover .update {
+ display: block;
+ display: flex;
+}
+
+.update {
+  position: absolute;
+  top: 5px;
+  font-size: 1.2rem;
+  height: 25px;
+  width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  display: none;
+}
+
+.edit-post {
+  left: 5px;
+  background-color: greenyellow;
+}
+
+.delete-post {
+  right: 5px;
+  background-color: rgb(155, 2, 2);
+  color: aliceblue;
+}
+
+.delete-post:hover {
+background-color: red;
+}
+
+.edit-post:hover {
+ background-color: rgb(199, 255, 116);
+}
+
+.post-title {
+ color: rgb(151, 151, 151);
+}
+
+.post-img {
+ height: 150px;
+ width: 100%;
+ object-fit: contain;
+ object-position: center;
+}
+
+.timestamp {
+ margin: 10px 0;
+ background-color: rgb(218, 218, 218);
+ padding: 2px;
+ border-radius: 5px;
+ font-size: 15px;
+}
+
+
+
+

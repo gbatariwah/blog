@@ -1,0 +1,25 @@
+const express = require("express")
+const router = express.Router()
+const homeController = require("../controllers/homeController")
+const signUpController = require("../controllers/signUpController")
+const signInController = require("../controllers/signInController")
+const postController = require("../controllers/postController")
+const auth = require("../middlewares/user")
+
+router.get("/", homeController.home)
+router.get("/contact", homeController.contact)
+router.get("/about", homeController.about)
+router.get("/sign-up", signUpController.signUp)
+router.post("/sign-up", signUpController.createNewUser, signUpController.redirect)
+router.get("/sign-in", signInController.signIn)
+router.post("/sign-in", signInController.authenticate, signInController.redirect)
+router.get("/sign-out", homeController.signOut)
+router.get("/new-post",postController.authenticate, postController.newPost)
+router.post("/new-post", postController.createNewPost, postController.redirect)
+router.get("/posts/:id", homeController.post)
+router.delete("/posts/:id/delete", homeController.deletePost)
+router.get("/posts/:id/edit", postController.edit)
+router.put("/posts/:id/update", postController.update, postController.redirect)
+
+
+module.exports = router

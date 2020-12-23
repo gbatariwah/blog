@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+* {
+ transition: all ease-in-out 0.2s;
+}
+.nav {
+ height: 50px;
+ background-color: black;
+ list-style-type: none;
+ font-family: 'Poppins', sans-serif;
+ position: relative;
+ display: flex;
+ 
+}
+
+.nav-links {
+ display: flex;
+ background-color: black;
+ z-index: 10;
+ width: 100%;
+}
+
+.nav-links li {
+ color: white;
+ line-height: 50px;
+ margin: 0 10px;
+ }
+
+.nav-links li a {
+ color: white;
+ 
+}
+.nav-links li a:hover {
+ border-bottom: solid 2px white;
+ 
+}
+
+.nav-links li:nth-child(4) {
+ flex: 1;
+}
+.humburger {
+ padding: 20px 10px;
+ display: none;
+}
+
+
+#menu {
+ display: none;
+}
+
+.label, .label::before, .label::after {
+ height: 5px;
+ width: 30px;
+ background-color: white;
+ position: absolute;
+ cursor: pointer;
+}
+
+.label::before {
+ content: "";
+ transform: translateY(-10px);
+}
+.label::after {
+ content: "";
+ transform: translateY(10px);
+}
+
+
+
+
+
+
+
+@media (max-width: 720px) {
+  body {
+    overflow-x: hidden;
+  }
+ .nav-links {
+  height: 0;
+  position: absolute;
+  top: 100%;
+  width: 100vw;
+  flex-direction: column;
+  border-top: solid 1px white;
+  overflow: hidden;
+  text-align: right;
+  letter-spacing: 0.5px;
+  padding-right: 100px;
+ }
+
+ .nav {
+   justify-content: space-around;
+ }
+
+ 
+
+
+ .humburger {
+  display: block;
+  width: 0;
+}
+.show {
+ height: 300px;
+}
+
+}
+
+footer {
+ background-color: black;
+ color: white;
+ padding: 10px;
+ text-align: center;
+ position: relative;
+ bottom: 0px;
+}
+
+body {
+ display: flex;
+ flex-direction: column;
+ min-height: 100vh;
+ justify-content: space-between;
+}
+
+.logo {
+  box-sizing: border-box;
+  height: 50px;
+  width: 80px;
+  background-color: white;
+  border: solid black 1px;
+  margin: 0 50px 0 10px;
+  text-align: center;
+  border-radius: 50% 0 0 50%;
+}
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/css/navbar.css">
+<link rel="stylesheet" href="/css/form.css">
+<script defer src="/js/navbar.js"></script>
+ <title>Sign-Up</title>
+</head>
+<body>
+ <%- include("layouts/navbar") %>
+ <form action="/sign-up" method="POST">
+   <div class="form-container">
+  <h3>Sign-Up</h3>
+  <% if(messages) {%>
+   <% if(messages.error) { %>
+    <p style="color: red;">***<%= messages.error %> *** </p>
+    <% } %>
+     <% } %>
+  
+  
+   <input type="text" name="name" placeholder="Name">
+  
+  
+   <input type="email" name="email" placeholder="Email">
+  
+  
+   <input type="password" name="password" placeholder="Password">
+  
+  <button type="submit">Sign-Up</button>
+<p>Already have an acount? <a href="/sign-in">Sign-In</a></p>
+  </div>
+  
+ </form>
+ <%- include("layouts/footer") %>
+</body>
+</html>

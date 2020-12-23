@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/navbar.css">
+<link rel="stylesheet" href="/css/post.css">
+<script defer src="/js/navbar.js"></script>
+ <title>Create New Post</title>
+</head>
+<body>
+ <%- include("layouts/navbar") %>
+<form action="/new-post" method="POST" enctype="multipart/form-data">
+  <h3>Add a Post</h3>
+<p class="inputs">
+  <input type="text" placeholder="Title" name="title">
+   <span style="display: flex; align-items: center; flex: 1;"><label for="image">📷</label>
+  <span class="image-name"></span></span>
+  <input type="file" name="image" id="image">
+<button type="submit">Add Post</button>
+</p>
+ 
+ <div id="editor"></div>
+ <input type="hidden" name="body">
+
+</form>
+<script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+ <script>
+ const editor = document.getElementById("editor")
+ const form = document.forms[0]
+ const body = form.body
+ 
+
+ const image = form.image
+ const imageName = document.querySelector(".image-name")
+
+ function showFileName(e) {
+   const file = e.target.files[0]
+   imageName.innerText = file.name
+ }
+
+ image.onchange = showFileName
+ 
+ var fonts = ['Arial', 'Courier', 'Garamond', 'Tahoma', 'Times New Roman', 'Verdana'];
+  
+  function getFontName(font) {
+    return font.toLowerCase().replace(/\s/g, "-");
+  }
+  let fontNames = fonts.map(font => getFontName(font));
+  
+  let fontStyles = "";
+  fonts.forEach(function (font) {
+    var fontName = getFontName(font);
+    fontStyles += ".ql-snow .ql-picker.ql-font .ql-picker-label[data-value=" + fontName + "]::before, .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=" + fontName + "]::before {" +
+      "content: '" + font + "';" +
+      "font-family: '" + font + "', sans-serif;" +
+      "}" +
+      ".ql-font-" + fontName + "{" +
+      " font-family: '" + font + "', sans-serif;" +
+      "}";
+  });
+  let node = document.createElement('style');
+  node.innerHTML = fontStyles;
+  document.body.appendChild(node);
+
+ let toolbarOptions = [
+   ['bold', 'italic', 'underline', 'strike'],
+   ['blockquote', 'code-block'],
+   [{ 'header': 1 }, { 'header': 2 }],
+   [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+   [{ 'script': 'sub' }, { 'script': 'super' }],
+   [{ 'indent': '-1' }, { 'indent': '+1' }],
+   [{ 'direction': 'rtl' }],
+   [{ 'size': ['small', false, 'large', 'huge'] }],
+   [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+   [{ 'color': [] }, { 'background': [] }],
+   [{ 'font': fontNames }],
+   [{ 'align': [] }],
+   ["link", "image", "video", "formula"],
+   ['clean']
+  ];
+
+  let Font = Quill.import('formats/font');
+    Font.whitelist = fontNames;
+    Quill.register(Font, true);
+
+  let quill = new Quill(editor, {
+   modules: {
+    toolbar: toolbarOptions
+   },
+   theme: 'snow'
+  });
+
+  form.onsubmit = () => {
+   body.value = quill.root.innerHTML
+  }
+
+ </script>
+ <%- include("layouts/footer") %>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/navbar.css">
+<link rel="stylesheet" href="/css/post.css">
+<script defer src="/js/navbar.js"></script>
+ <title>Edit Post</title>
+</head>
+
+<body>
+ <%- include("layouts/navbar") %>
+  <form action="<%= `/posts/${post._id}/update?_method=PUT`  %> " method="POST" enctype="multipart/form-data">
+    <h3>Edit Post</h3>
+   <div>
+    <p class="inputs">
+      <input type="text" placeholder="Title" name="title" value="<%= post.title  %> ">
+    <span style="display: flex; align-items: center; flex: 1;"><label for="image">📷</label>
+      <span class="image-name"></span></span>
+    <input type="file" name="image" id="image">
+      <button type="submit">Update Post</button>
+    </p>
+    <div id="editor"></div>
+    <input type="hidden" name="body" value="<%= post.body  %> "> 
+   </div>
+  </form>
+  <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+  <script>
+   const editor = document.getElementById("editor")
+   const form = document.forms[0]
+   const body = form.body
+
+   const image = form.image
+    const imageName = document.querySelector(".image-name")
+
+    function showFileName(e) {
+      const file = e.target.files[0]
+      imageName.innerText = file.name
+    }
+
+    image.onchange = showFileName
+   
+
+   let toolbarOptions = [
+    ['bold', 'italic', 'underline', 'strike'],
+    ['blockquote', 'code-block'],
+    [{ 'header': 1 }, { 'header': 2 }],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+    [{ 'script': 'sub' }, { 'script': 'super' }],
+    [{ 'indent': '-1' }, { 'indent': '+1' }],
+    [{ 'direction': 'rtl' }],
+    [{ 'size': ['small', false, 'large', 'huge'] }],
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    [{ 'color': [] }, { 'background': [] }],
+    [{ 'font': [] }],
+    [{ 'align': [] }],
+    ["link", "image", "video", "formula"],
+    ['clean']
+   ];
+   let quill = new Quill(editor, {
+    modules: {
+     toolbar: toolbarOptions
+    },
+    theme: 'snow'
+   });
+
+   document.addEventListener("DOMContentLoaded", ()=> {
+    quill.root.innerHTML = body.value
+   })
+
+   form.onsubmit = () => {
+    body.value = quill.root.innerHTML
+   }
+
+  </script>
+  <%- include("layouts/footer") %>
+</body>
+
+</html>

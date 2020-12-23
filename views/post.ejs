@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="/css/navbar.css">
+ <link rel="stylesheet" href="/css/article.css">
+ <script defer src="/js/navbar.js"></script>
+ <title>Post</title>
+</head>
+<body>
+ <%- include("layouts/navbar") %>
+ <main>
+ <h3><%= post.title  %> </h3>
+ <img height="200"  width= "300" src=<%= post.imageUrl  %>  alt="">
+ <section><%- post.body %></section>
+ </main>
+ <%- include("layouts/footer") %>
+</body>
+</html>

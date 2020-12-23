@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="/css/navbar.css">
+ <link rel="stylesheet" href="/css/home.css">
+ <script defer src="/js/navbar.js"></script>
+ <title>Home</title>
+</head>
+<%- include("layouts/navbar")  %> 
+<body>
+ 
+ <h3>Posts</h3>
+ 
+<main>
+ <% posts.forEach(post => { %> 
+   <article>
+    <% if(user && user.isAdmin) { %> 
+     <a class="delete-post update" href="<%= `/posts/${post._id}/delete?_method=DELETE` %> ">×</a>
+     <a class="edit-post update" href="<%= `/posts/${post._id}/edit/` %> ">✎</a>
+
+     <% } %> 
+  <h3><a class="post-title" href="/posts/<%= post._id  %>" ><%= post.title %> </a> </h3>
+
+  <img class="post-img" height="100" width="200" src=<%= post.imageUrl  %>  alt="image">
+   <section>
+<%- post.body.slice(0,200) %>...
+   </section>
+  
+   <p class="timestamp"><%= post.createdAt.toLocaleString() %> </p>
+  </article>
+  <% }) %> 
+    
+    </main>
+  <%- include("layouts/footer") %>
+</body>
+</html>
